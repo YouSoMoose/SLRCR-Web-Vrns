@@ -2833,8 +2833,13 @@
                       </tbody>
                     </table>
                     <p></p>
-                    <form method="POST" onsubmit="SubmitForm.disabled=true;ClearForm.disabled=true"
-                      action="https://www.solarcarchallenge.org/challenge/cgi-bin/workshop-specialty.cgi">
+                    <form method="POST" id="workshopForm"
+                      action="https://formsubmit.co/lehmanm743@aol.com">
+                      <input type="hidden" name="_subject" value="SCC Workshop Reservation Request">
+                      <input type="hidden" name="_captcha" value="false">
+                      <input type="hidden" name="_template" value="table">
+                      <input type="hidden" name="_next" value="">
+                      <input type="hidden" name="_honey" value="">
                       Please complete the following information to request a reservation for the Specialty Workshop no
                       later than one
                       week in advance.
@@ -2922,8 +2927,9 @@
         -->
                           <tr>
                             <td colspan="2" class="body">
-                              <input type="SUBMIT" name="SubmitForm" value="Submit Form"><input type="RESET"
-                                name="ClearForm" value="Clear Form">
+                              <input type="SUBMIT" name="SubmitForm" value="Submit Form">
+                              <input type="RESET" name="ClearForm" value="Clear Form">
+                              <div class="scc-form-msg" id="workshopMsg"></div>
                             </td>
                           </tr>
                           <tr>
@@ -2933,6 +2939,41 @@
                           </tr>
                         </tbody>
                       </table>
+                    </form>
+                    <script>
+                    (function(){
+                      var form = document.getElementById('workshopForm');
+                      if (!form) return;
+                      form.addEventListener('submit', function(e){
+                        e.preventDefault();
+                        var submit = form.querySelector('input[type="SUBMIT"]');
+                        var msg    = document.getElementById('workshopMsg');
+                        var entry = {
+                          _type:         'workshop',
+                          _submitted:    new Date().toLocaleString(),
+                          teachname:     form.teachname.value.trim(),
+                          teachemail:    form.teachemail.value.trim(),
+                          teachphone:    form.teachphone.value.trim(),
+                          schoolname:    form.schoolname.value.trim(),
+                          schooladdress: form.schooladdress.value.trim(),
+                          attending:     form.attending.value.trim()
+                        };
+                        if (!entry.teachname || !entry.teachemail || !entry.schoolname) {
+                          msg.className = 'scc-form-msg error';
+                          msg.textContent = '✗ Please fill in Teacher Name, Email, and School Name.';
+                          return;
+                        }
+                        var all = JSON.parse(localStorage.getItem('scc_submissions') || '[]');
+                        all.push(entry);
+                        localStorage.setItem('scc_submissions', JSON.stringify(all));
+                        msg.className = 'scc-form-msg success';
+                        msg.textContent = '✓ Reservation request saved! We will be in touch soon.';
+                        form.reset();
+                        submit.disabled = true;
+                        submit.value = 'Submitted';
+                      });
+                    })();
+                    </script>
                     </form>
 
                     <!-- WORKSHOP PHOTOS ------------------------------------------------------------------->

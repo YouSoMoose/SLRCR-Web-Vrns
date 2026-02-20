@@ -2643,49 +2643,51 @@
 													<div class="title">Testimonials</div>
 
 													<style>
-/* ── Testimonial Slider — self-contained, immune to global td div override ── */
+/* ── Testimonial Slider — pixel-locked, immune to table layout ── */
 .t-intro p { line-height: 1.7; color: #333; margin-bottom: 20px; }
 
-/* Outer wrapper: fixed width, clips the sliding track */
+/* Outer wrapper: 800px wide, centered */
 .t-slider-wrap {
   position: relative;
-  width: 100%;
-  max-width: 100%;
+  width: 800px !important;
+  max-width: 800px !important;
+  min-width: 0 !important;
+  margin: 0 auto 8px auto !important;
   overflow: hidden !important;
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   background: #fff;
   border: 1px solid #e0e2e8;
-  margin-bottom: 8px;
-  box-sizing: border-box;
+  box-sizing: border-box !important;
 }
 
-/* Track: a single flex row — MUST stay flex, not block */
+/* Track: flex row, no width constraint */
 .t-track {
   display: flex !important;
   flex-direction: row !important;
   flex-wrap: nowrap !important;
-  width: 100% !important;
   transition: transform 0.42s cubic-bezier(0.4,0,0.2,1);
   will-change: transform;
-  overflow: visible !important; /* track itself overflows; wrapper clips it */
   align-items: flex-start !important;
 }
 
-/* Each slide: exactly one viewport wide, never shrinks */
+/* Each slide: exactly 800px wide, fixed 300px tall so all cards match */
 .t-slide {
   display: flex !important;
   flex-direction: column !important;
-  flex: 0 0 100% !important;
-  min-width: 100% !important;
-  max-width: 100% !important;
-  width: 100% !important;
+  flex: 0 0 800px !important;
+  width: 800px !important;
+  min-width: 800px !important;
+  max-width: 800px !important;
+  height: 300px !important;
+  min-height: 300px !important;
+  max-height: 300px !important;
   box-sizing: border-box !important;
-  padding: 36px 44px 28px;
-  overflow: visible !important;
+  padding: 28px 40px 20px !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
   white-space: normal !important;
+  overflow: hidden !important;
 }
 
 /* Large decorative quote mark */
@@ -3023,6 +3025,7 @@
 
 <script>
 (function() {
+  var SLIDE_W = 800;
   var current = 0;
   var track = document.getElementById('tTrack');
   var total = 23;
@@ -3041,17 +3044,12 @@
 
   function goTo(idx) {
     current = idx;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    track.style.transform = 'translateX(-' + (current * SLIDE_W) + 'px)';
     counter.textContent = (current + 1) + ' / ' + total;
     prevBtn.disabled = current === 0;
     nextBtn.disabled = current === total - 1;
     var dots = dotsEl.querySelectorAll('.t-dot');
     dots.forEach(function(d, i) { d.className = 't-dot' + (i === current ? ' active' : ''); });
-    /* Resize wrapper to current slide height so text is never clipped */
-    var slides = track.querySelectorAll('.t-slide');
-    if (slides[current]) {
-      track.style.height = slides[current].offsetHeight + 'px';
-    }
   }
 
   window.tSlide = function(dir) { goTo(Math.min(Math.max(current + dir, 0), total - 1)); };

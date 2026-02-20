@@ -2640,8 +2640,12 @@
 									<td class="body">
 										<!-- Content begins here -->
 										<div class="title">Intent to Race in the 2026 Solar Car Challenge</div>
-										<form method="POST" onsubmit="SubmitForm.disabled=true;ClearForm.disabled=true"
-											action="https://www.solarcarchallenge.org/challenge/cgi-bin/intent.cgi">
+										<form method="POST" id="intentForm"
+											action="https://formsubmit.co/lehmanm743@aol.com">
+											<input type="hidden" name="_subject" value="SCC 2026 Intent to Race Submission">
+											<input type="hidden" name="_captcha" value="false">
+											<input type="hidden" name="_template" value="table">
+											<input type="hidden" name="_honey" value="">
 											<p>Please complete the following information to submit your intent to race
 												in the 2026 Solar Car Challenge.
 												<!--<BR><B>The Intent to Race period has closed. Please return in September 1, 2026 to register for the 2027 Solar Car Challenge.</B>-->
@@ -2778,14 +2782,61 @@
 																width="1" height="1"></td>
 													</tr>
 													<tr>
-														<td colspan="2" class="body"><input type="SUBMIT"
-																name="SubmitForm" value="Submit Form"><input
-																type="RESET" name="ClearForm" value="Clear Form"></td>
+														<td colspan="2" class="body">
+															<input type="SUBMIT" name="SubmitForm" value="Submit Form">
+															<input type="RESET" name="ClearForm" value="Clear Form">
+															<div class="scc-form-msg" id="intentMsg"></div>
+														</td>
 													</tr>
 												</tbody>
 											</table>
 											</p>
 										</form>
+										<script>
+										(function(){
+										  var form = document.getElementById('intentForm');
+										  if (!form) return;
+										  form.addEventListener('submit', function(e){
+										    e.preventDefault();
+										    var submit = form.querySelector('input[type="SUBMIT"]');
+										    var msg    = document.getElementById('intentMsg');
+										    var entry = {
+										      _type:          'intent',
+										      _submitted:     new Date().toLocaleString(),
+										      team:           form.team.value.trim(),
+										      school:         form.school.value.trim(),
+										      street:         form.street.value.trim(),
+										      city:           form.city.value.trim(),
+										      state:          form.state.value.trim(),
+										      zip:            form.zip.value.trim(),
+										      country:        form.country.value.trim(),
+										      school_phone:   form.school_phone.value.trim(),
+										      adviser:        form.sponsor.value.trim(),
+										      adviser_phone:  form.sponsor_phone.value.trim(),
+										      adviser_email:  form.sponsor_email.value.trim(),
+										      captain:        form.captain.value.trim(),
+										      captain_phone:  form.captain_phone.value.trim(),
+										      captain_email:  form.captain_email.value.trim(),
+										      vehicle:        form.vehicle.value.trim(),
+										      vehicle_class:  form['class'].value.trim(),
+										      webpage:        form.webpage.value.trim()
+										    };
+										    if (!entry.team || !entry.school) {
+										      msg.className = 'scc-form-msg error';
+										      msg.textContent = '✗ Please fill in at least Team Name and School.';
+										      return;
+										    }
+										    var all = JSON.parse(localStorage.getItem('scc_submissions') || '[]');
+										    all.push(entry);
+										    localStorage.setItem('scc_submissions', JSON.stringify(all));
+										    msg.className = 'scc-form-msg success';
+										    msg.textContent = '✓ Intent to Race saved for the 2026 Solar Car Challenge!';
+										    form.reset();
+										    submit.disabled = true;
+										    submit.value = 'Submitted';
+										  });
+										})();
+										</script>
 										<!-- Content ends here -->
 										<!-- Footer block starts -->
 										<p><br><br>
