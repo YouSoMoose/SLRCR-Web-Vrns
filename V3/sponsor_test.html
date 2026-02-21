@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Sponsor Image Path Test</title>
+  <style>
+    body { font-family: sans-serif; background: #f0f2f5; padding: 20px; }
+    h1 { font-size: 18px; margin-bottom: 4px; }
+    p { font-size: 13px; color: #666; margin-bottom: 24px; }
+    .grid { display: flex; flex-wrap: wrap; gap: 12px; }
+    .card {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 12px;
+      width: 160px;
+      text-align: center;
+      font-size: 11px;
+    }
+    .card img {
+      height: 40px;
+      width: auto;
+      max-width: 140px;
+      object-fit: contain;
+      display: block;
+      margin: 0 auto 8px;
+    }
+    .card .label { color: #333; font-weight: 600; word-break: break-all; }
+    .card .path  { color: #999; margin-top: 4px; word-break: break-all; }
+    .card.ok     { border-color: #4caf50; }
+    .card.fail   { border-color: #f44336; background: #fff5f5; }
+    .status { font-size: 12px; margin-top: 6px; font-weight: bold; }
+    .ok   .status { color: #4caf50; }
+    .fail .status { color: #f44336; }
+    #summary { margin-bottom: 20px; padding: 12px 16px; background: #fff; border-radius: 8px; border: 1px solid #ddd; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Sponsor Image Path Test</h1>
+  <p>Green border = image loaded OK &nbsp;|&nbsp; Red border = broken path.<br>
+     Put this HTML file in the <strong>same folder</strong> as your other HTML pages (e.g. the <code>challenge/</code> folder).</p>
+  <div id="summary">Loading...</div>
+  <div class="grid" id="grid"></div>
+
+  <script>
+    var SPONSORS = [
+      { name: 'Caraway Family Foundation', img: 'sponsor/Caraway.png' },
+      { name: 'Oncor',                     img: 'sponsor/Oncor.svg' },
+      { name: 'Lockheed Martin',           img: 'sponsor/Lockheed.png' },
+      { name: 'Texas Motor Speedway',      img: 'sponsor/TXmotorSpeedway.gif' },
+      { name: 'Vistra',                    img: 'sponsor/Vistra.png' },
+      { name: 'RTX',                       img: 'sponsor/RTX.svg' },
+      { name: 'Northrop Grumman',          img: 'sponsor/Northrop.png' },
+      { name: 'Siemens Solid Edge',        img: 'sponsor/Siemens.png' },
+      { name: 'Visit Fort Worth',          img: 'sponsor/FortWorth.jpg' },
+      { name: 'Lincoln Electric',          img: 'sponsor/LincolnE.svg' },
+      { name: 'American Hakko',            img: 'sponsor/Hakko.svg' },
+      { name: 'Hillwood',                  img: 'sponsor/Hillwood.png' },
+      { name: 'Golden Motor',              img: 'sponsor/GoldenMotors.png' },
+      { name: 'A Abana Auto Insurance',    img: 'sponsor/AAbanaAuto.png' },
+      { name: 'Google',                    img: 'sponsor/Google.svg' },
+      { name: 'NBC 5',                     img: 'sponsor/NBCDFW.png' },
+      { name: 'DTN',                       img: 'sponsor/DTN.png' },
+      { name: 'Texas Solar Energy Society',img: 'sponsor/TexasSolarEnergy.png' },
+      { name: 'North Texas Renewable Energy', img: 'sponsor/NTREG.png' },
+      { name: 'DFW Marriott',              img: 'sponsor/Marriott.png' },
+      { name: 'Bank of America Foundation',img: 'sponsor/BOfA.png' },
+      { name: 'GM Foundation',             img: 'sponsor/GM.png' },
+      { name: 'Capital One Foundation',    img: 'sponsor/CapOne.png' },
+      { name: 'Verizon Foundation',        img: 'sponsor/Verizon.png' },
+      { name: 'Ryder Trucks',              img: 'sponsor/Ryder.gif' },
+      { name: 'Yumi Ice Cream',            img: 'sponsor/YUMI.jpg' },
+      { name: 'Ham-Com',                   img: 'sponsor/Ham35Com.png' },
+      { name: 'Krage & Janvey',            img: 'sponsor/KJ.gif' }
+    ];
+
+    var grid = document.getElementById('grid');
+    var ok = 0, fail = 0;
+
+    SPONSORS.forEach(function(s) {
+      var card = document.createElement('div');
+      card.className = 'card';
+
+      var img = document.createElement('img');
+      img.alt = s.name;
+      img.src = s.img;
+
+      var label = document.createElement('div');
+      label.className = 'label';
+      label.textContent = s.name;
+
+      var path = document.createElement('div');
+      path.className = 'path';
+      path.textContent = s.img;
+
+      var status = document.createElement('div');
+      status.className = 'status';
+      status.textContent = 'loading...';
+
+      img.onload = function() {
+        card.classList.add('ok');
+        status.textContent = 'OK';
+        ok++;
+        updateSummary();
+      };
+      img.onerror = function() {
+        card.classList.add('fail');
+        status.textContent = 'NOT FOUND';
+        fail++;
+        updateSummary();
+      };
+
+      card.appendChild(img);
+      card.appendChild(label);
+      card.appendChild(path);
+      card.appendChild(status);
+      grid.appendChild(card);
+    });
+
+    function updateSummary() {
+      var total = ok + fail;
+      document.getElementById('summary').innerHTML =
+        '<strong>' + ok + ' / ' + SPONSORS.length + '</strong> images loaded &nbsp;|&nbsp; ' +
+        '<span style="color:#f44336"><strong>' + fail + '</strong> broken</span>' +
+        (total === SPONSORS.length
+          ? (fail === 0
+              ? ' — All images found!'
+              : ' — Fix the red ones. Paths are case-sensitive, and the <code>sponsor/</code> folder must be in the same directory as this HTML file.')
+          : '');
+    }
+  </script>
+</body>
+</html>
