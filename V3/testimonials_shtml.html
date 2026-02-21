@@ -2671,7 +2671,7 @@
   align-items: flex-start !important;
 }
 
-/* Each slide: exactly 800px wide, fixed 300px tall so all cards match */
+/* Each slide: exactly 800px wide, fixed 360px tall so all cards match */
 .t-slide {
   display: flex !important;
   flex-direction: column !important;
@@ -2679,15 +2679,28 @@
   width: 800px !important;
   min-width: 800px !important;
   max-width: 800px !important;
-  height: 300px !important;
-  min-height: 300px !important;
-  max-height: 300px !important;
+  height: 360px !important;
+  min-height: 360px !important;
+  max-height: 360px !important;
   box-sizing: border-box !important;
   padding: 28px 40px 20px !important;
   word-wrap: break-word !important;
   overflow-wrap: break-word !important;
   white-space: normal !important;
   overflow: hidden !important;
+}
+
+/* Quote text fills available space and scrolls if too long */
+.t-slide .t-text {
+  flex: 1 1 0 !important;
+  overflow-y: auto !important;
+  min-height: 0 !important;
+}
+
+/* Author row always pinned to bottom */
+.t-slide .t-author {
+  flex-shrink: 0 !important;
+  margin-top: 12px !important;
 }
 
 /* Large decorative quote mark */
