@@ -63,19 +63,36 @@
     }
   ];
 
-  /* ── SPONSORS (first 3 are always shown) ────────────────────── */
+  /* ── SPONSORS ───────────────────────────────────────────────── */
   var SPONSORS = [
-    { name: 'Caraway Family Foundation', img: '/challenge/sponsors/Caraway_Family_Foundation.png' },
-    { name: 'Oncor',           img: '/challenge/sponsors/oncor.png',           href: 'https://www.oncor.com/' },
-    { name: 'Lockheed Martin', img: '/challenge/sponsors/lockheedmartin.png',  href: 'http://www.lockheedmartin.com/' },
-    { name: 'Texas Motor Speedway', img: '/challenge/sponsors/tms.gif',        href: 'http://www.texasmotorspeedway.com' },
-    { name: 'Vistra',          img: '/challenge/sponsors/vistra.png',          href: 'https://vistracorp.com/' },
-    { name: 'RTX',             img: '/challenge/sponsors/rtx_white.svg',       href: 'https://www.rtx.com/' },
-    { name: 'Northrop Grumman',img: '/challenge/sponsors/northrop_grumman_white.png', href: 'https://www.northropgrumman.com/' },
-    { name: 'Siemens Solid Edge', img: '/challenge/sponsors/siemens.jpg',      href: 'https://www.plm.automation.siemens.com/' },
-    { name: 'Lincoln Electric', img: '/challenge/sponsors/lincoln_electric.svg', href: 'https://www.lincolnelectric.com/' },
-    { name: 'Google',          img: '/challenge/sponsors/google.svg',           href: 'http://www.google.com/' },
-    { name: 'DTN',             img: '/challenge/sponsors/dtn.png',              href: 'https://www.dtn.com/' }
+    { name: 'Caraway Family Foundation', img: 'sponsors/Caraway.png',         href: '' },
+    { name: 'Oncor',                img: 'sponsors/Oncor.png',                href: 'https://www.oncor.com/' },
+    { name: 'Lockheed Martin',      img: 'sponsors/Lockheed.png',             href: 'http://www.lockheedmartin.com/' },
+    { name: 'Texas Motor Speedway', img: 'sponsors/TXmotorSpeedway.gif',      href: 'http://www.texasmotorspeedway.com' },
+    { name: 'Vistra',               img: 'sponsors/Vistra.png',               href: 'https://vistracorp.com/' },
+    { name: 'RTX',                  img: 'sponsors/RTX.svg',                   href: 'https://www.rtx.com/social-impact/corporate-responsibility', bg: '#1a3a6b' },
+    { name: 'Northrop Grumman',     img: 'sponsors/Northrop.png',             href: 'https://www.northropgrumman.com/corporate-responsibility/corporate-citizenship/northrop-grummans-philanthropic-initiatives', bg: '#000000' },
+    { name: 'Siemens Solid Edge',   img: 'sponsors/Siemens.png',              href: 'https://www.plm.automation.siemens.com/' },
+    { name: 'Visit Fort Worth',     img: 'sponsors/FortWorth.jpg',            href: 'http://www.fortworth.com/' },
+    { name: 'Lincoln Electric',     img: 'sponsors/LincolnE.svg',              href: 'https://www.lincolnelectric.com/' },
+    { name: 'American Hakko',       img: 'sponsors/Hakko.svg',                href: 'https://hakkousa.com/' },
+    { name: 'Hillwood',             img: 'sponsors/Hillwood.png',             href: 'https://www.hillwood.com/' },
+    { name: 'Golden Motor',         img: 'sponsors/GoldenMotors.png',         href: 'https://goldenmotor.bike' },
+    { name: 'A Abana Auto Insurance', img: 'sponsors/AAbanaAuto.png',         href: 'http://www.a-abana.com/' },
+    { name: 'Google',               img: 'sponsors/Google.svg',               href: 'http://www.google.com/' },
+    { name: 'NBC 5',                img: 'sponsors/NBCDFW.png',               href: 'http://www.nbcdfw.com' },
+    { name: 'DTN',                  img: 'sponsors/DTN.png',                  href: 'https://www.dtn.com/' },
+    { name: 'Texas Solar Energy Society', img: 'sponsors/TexasSolarEnergy.png', href: 'http://www.txses.org/' },
+    { name: 'North Texas Renewable Energy', img: 'sponsors/NTREG.png',        href: 'http://www.ntreg.org/' },
+    { name: 'DFW Marriott',         img: 'sponsors/Marriott.png',             href: 'http://www.marriott.com/hotels/travel/dfwmc-dallas-fort-worth-marriott-hotel-and-golf-club-at-champions-circle/' },
+    { name: 'Bank of America Foundation', img: 'sponsors/BOfA.png',          href: 'http://www.bankofamerica.com/foundation/' },
+    { name: 'GM Foundation',        img: 'sponsors/GM.png',                   href: 'http://www.gm.com/company/giving-back/about.html' },
+    { name: 'Capital One Foundation', img: 'sponsors/CapOne.png',             href: 'http://www.capitalone.com/about/corporate-citizenship/' },
+    { name: 'Verizon Foundation',   img: 'sponsors/Verizon.png',              href: 'http://www.verizon.com/about/responsibility/giving-and-grants' },
+    { name: 'Ryder Trucks',         img: 'sponsors/Ryder.gif',                href: 'http://www.ryder.com/' },
+    { name: 'Yumi Ice Cream',       img: 'sponsors/YUMI.jpg',                 href: 'http://www.yumiicecream.com/' },
+    { name: 'Ham-Com',              img: 'sponsors/Ham35Com.png',              href: 'http://www.hamcom.org/' },
+    { name: 'Krage & Janvey',       img: 'sponsors/KJ.gif',                   href: 'http://www.kjllp.com' }
   ];
 
 
@@ -170,19 +187,42 @@
     /* Double the list for seamless loop */
     var allSp = SPONSORS.concat(SPONSORS);
     allSp.forEach(function (s) {
-      var el = document.createElement(s.href ? 'a' : 'div');
+      var el = document.createElement('a');
       el.className = 'scc-sp-item';
-      if (s.href) { el.href = s.href; el.target = '_blank'; }
-
-      if (s.img) {
-        var img = document.createElement('img');
-        img.src = s.img;
-        img.alt = s.name;
-        el.appendChild(img);
-      }
+      el.href = s.href || '#';
+      el.target = '_blank';
+      el.rel = 'noopener noreferrer';
 
       var name = document.createElement('span');
       name.textContent = s.name;
+
+      if (s.img) {
+        var imgWrap = document.createElement('div');
+        imgWrap.className = 'scc-sp-img-wrap';
+        if (s.bg) {
+          imgWrap.style.backgroundColor = s.bg;
+          imgWrap.style.borderRadius = '4px';
+          imgWrap.style.padding = '4px 8px';
+          imgWrap.style.display = 'inline-flex';
+          imgWrap.style.alignItems = 'center';
+          imgWrap.style.justifyContent = 'center';
+        }
+        var img = document.createElement('img');
+        img.src = s.img;
+        img.alt = s.name;
+        /* When image loads successfully, hide the text label */
+        img.onload = function() { name.style.display = 'none'; };
+        /* When image fails, hide the broken icon and show text label instead */
+        img.onerror = function() {
+          imgWrap.style.display = 'none';
+          name.style.display = '';
+        };
+        imgWrap.appendChild(img);
+        el.appendChild(imgWrap);
+        /* Start with name hidden — onload will confirm, onerror will show it */
+        name.style.display = 'none';
+      }
+
       el.appendChild(name);
 
       track.appendChild(el);

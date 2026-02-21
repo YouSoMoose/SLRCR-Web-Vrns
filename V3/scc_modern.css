@@ -326,16 +326,27 @@ td.top  div:not(.t-slider-wrap):not(.t-track):not(.t-slide):not(.t-quote-icon):n
   100% { transform: translateX(-50%); }
 }
 .scc-sp-item {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   text-decoration: none;
   flex-shrink: 0;
-  opacity: 0.7;
+  opacity: 0.75;
   transition: opacity 0.2s;
 }
 .scc-sp-item:hover { opacity: 1; }
-.scc-sp-item img { height: 22px; width: auto; display: block; object-fit: contain; filter: grayscale(30%); }
+.scc-sp-img-wrap { display: inline-flex; align-items: center; height: 28px; }
+.scc-sp-item img {
+  height: 26px;
+  width: auto;
+  max-width: 110px;
+  display: block;
+  object-fit: contain;
+  filter: grayscale(20%);
+  /* Hide broken image icon — only show if src loads */
+  overflow: hidden;
+}
+.scc-sp-item img[src=""] { display: none; }
 .scc-sp-item:hover img { filter: none; }
 .scc-sp-item span {
   font-family: 'Exo 2', system-ui, sans-serif;

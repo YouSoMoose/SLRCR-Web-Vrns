@@ -10,7 +10,6 @@
 	<meta name="description"
 		content="The only international high school solar education program and race in the world. Program includes workshops, curriculum materials and team assistance leading to an annual race. 2021: TEXAS MOTOR SPEEDWAY; 2019: TEXAS MOTOR SPEEDWAY; 2018: FORT WORTH,TX - PALMDALE, CA; 2017: TEXAS MOTOR SPEEDWAY">
 	<link rel="stylesheet" href="scc_modern.css">
-	<script src="scc_nav.js"></script>
 	<script language="javascript">var mydate = new Date();
 		var myday = mydate.getDate();
 
@@ -2370,6 +2369,14 @@
 
 		gtag('config', 'G-QWTVMS35VW');
 	</script>
+<style>
+  /* Override scc_nav.js global iframe rule for the YouTube Short */
+  .scc-yt-short iframe {
+    margin: 0 !important;
+    max-width: none !important;
+  }
+</style>
+<script src="scc_nav.js"></script>
 </head>
 <!-- Google tag (gtag.js) -->
 
@@ -2633,11 +2640,9 @@
 									<td class="body">
 										<!-- Content begins here -->
 										<div class="title">Internships</div>
-										<table style="margin-left: -10px; margin-top:5px; border-spacing:10px">
-											<tbody>
-												<tr>
-													<td valign="top">
-														<p>We are inviting applications for internships in the Solar Car
+										<div style="display:flex; gap:24px; align-items:flex-start; width:100%; margin-top:5px;">
+  <div style="flex:1; min-width:0;">
+    <p>We are inviting applications for internships in the Solar Car
 															Challenge. We would like to have representatives from all
 															across the country. Interns must have participated in at
 															least one previous Challenge.
@@ -2654,7 +2659,7 @@
 														<p>For questions or to file your application for an internship,
 															please send an e-mail to <a
 																href="nullLehmanM743@aol.com">Dr. Lehman Marks</a>
-															(LehmanM743@aol.com) with the following information:
+															(<a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="1d517875707c73502a292e5d7c7271337e7270">[email&#160;protected]</a>) with the following information:
 														</p>
 														<ol>
 															<li>Full name and former team
@@ -2671,14 +2676,18 @@
 														<p>The deadline for filing your application for an internship is
 															March 15.
 														</p>
-													</td>
-													<td valign="top"><iframe width="216" height="384"
-															src="https://www.youtube.com/embed/cJ7h4Y-KKqU"
-															title="YouTube video player" frameborder="0"
-															allowfullscreen=""></iframe></td>
-												</tr>
-											</tbody>
-										</table>
+  </div>
+  <div style="flex-shrink:0;">
+    <iframe width="315" height="560"
+      src="https://www.youtube.com/embed/cJ7h4Y-KKqU?si=5MfZcjbmQTMTyv4Y"
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+      style="display:block; border-radius:8px; box-shadow:0 4px 18px rgba(0,0,0,0.18);"></iframe>
+  </div>
+</div>
 										<!-- Content ends here -->
 										<!-- Footer block starts -->
 										<p><br><br>
@@ -2703,16 +2712,4 @@
 										</table>
 										<!-- Footer block ends -->
 										</p>
-									</td>
-								</tr>
-							</tbody>
-						</table>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-	</font>
-
-
-
-</body>
+		
